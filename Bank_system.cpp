@@ -186,19 +186,19 @@ private:
     std::vector<Account> accounts;
 
     // Helper methods
-    Customer* findCustomerById(int id) {
-        for (auto& customer : customers) {
+    Customer* findCustomerById(int id) const {
+        for (const auto& customer : customers) {
             if (customer.getId() == id) {
-                return &customer;
+                return const_cast<Customer*>(&customer); // Casting away const-ness to return a non-const pointer
             }
         }
         return nullptr;
     }
 
-    Account* findAccountByNumber(int accountNumber) {
-        for (auto& account : accounts) {
+    Account* findAccountByNumber(int accountNumber) const {
+        for (const auto& account : accounts) {
             if (account.getAccountNumber() == accountNumber) {
-                return &account;
+                return const_cast<Account*>(&account); // Casting away const-ness to return a non-const pointer
             }
         }
         return nullptr;
